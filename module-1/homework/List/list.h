@@ -1,7 +1,6 @@
 #pragma once
 #include <cstddef>
 
-
 namespace task {
 
 
@@ -11,6 +10,7 @@ public:
 
     list();
     list(size_t count, const int& value = int());
+	list(const list& other);
 
     ~list();
     list& operator=(const list& other);
@@ -36,16 +36,37 @@ public:
     void swap(list& other);
 
 
-    void remove(const int& value);
+    void remove(const int value);
     void unique();
     void sort();
 
-    // Your code goes here?..
+       
+    void print() { // for debug
+        node *curr = this->head;
+        for(size_t i = 0; i < sz; i++) {
+            std::cout << curr->value << " ";
+            curr = curr->next;
+        }
+        std::cout << "\n";
+    }
 
 private:
+	void init() {
+		head = nullptr;
+		tail = nullptr;
+		sz = 0;
+	}
 
-    // Your code goes here...
+    struct node {
+        int value;
+        node *next;
+    };
+
+    
+    size_t sz;
+    node *head, *tail;
+    
 
 };
 
-}  // namespace task
+}
